@@ -22,23 +22,27 @@ source .env/bin/activate
 Credentials
 ------------
 ```
-
 Defaults are defined in ~/.aws/credentials
 
 TODO: How to setup project specific?
+```
 
+Monitor RAM usage
+--------------
+```
+TODO
 ```
 
 Load balancing
 --------------
 ```
-
-
+TODO
 ```
 
 CD/CI system
 ------------
 ```
+TODO
 - CodeBuild
 - CodePipeline
 - Push to github.
@@ -57,19 +61,30 @@ See: eb labs setup-ssl
 
 Configuring a database
 ------------------------
+TODO: I don't need this for now as my service is stateless, will add notes if I ever do.
 
 https://tomkadwill.com/running-rails-on-aws-elastic-beanstalk
 https://medium.com/@jameshamann/deploying-rails-5-app-using-elastic-beanstalk-and-postgresql-8ca19bc7648a
 
-```
-brew install awsebcli
-```
-
-
 Logging
 --------
 ```
-Enable "S3 log storage" and "Instance log streaming to CloudWatch Logs" in GUI: Elastic Beanstalk > Configuration > Software.
+# You can enable "S3 log storage" and "Instance log streaming to CloudWatch Logs" in GUI: Elastic Beanstalk > Configuration > Software.
+# or by using `eb logs --cloudwatch-logs enable`
+
+# Instance log streaming must be enabled to use the `--stream` flag in `eb logs`
+
+# Stream error logs
+eb logs --stream -g /var/log/httpd/error_log
+
+# Use `eb ssh` to view instance logs in /opt/python/log/application.log
+# Or just use `eb log` and look under `/opt/python/log/application.log`
+
+# See application.py for an example of how to store logs
+
+# TODO can't figure out how to stream application.log
+# I believe it requires setting up an .ebextension as show here: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.cloudwatchlogs.html#AWSHowTo.cloudwatchlogs.loggroups#AWSHowTo.cloudwatchlogs.files
+# But it probably is not worth the effort
 ```
 
 Connect to S3
@@ -87,15 +102,6 @@ Run:
 python application.py
 ```
 
-File explanations
------------------
-```
-.elasticbeanstalk
-  config.yml
-
-
-```
-
 Commands
 --------
 
@@ -109,12 +115,16 @@ eb create
 # Use `eb list` to list environments.
 
 eb deploy
+# Deploy most recent git commit
 
 eb open
+# Open server, similar to `heroku open`.
 
+# Show some status
 eb status
 eb health
 
+# Change default enviroment
 eb use
 
 eb logs
@@ -126,13 +136,9 @@ eb ssh
 
 
 
+# Heroku commands to mimic:
 
-
-
-
-heroku open
-
-heroku run 
+heroku run
 heroku run:detached
 
 heroku restart
