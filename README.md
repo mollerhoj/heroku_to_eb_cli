@@ -8,27 +8,55 @@ I'm a long time user of heroku's excelent PaaS. But AWS has a number of advantag
 
 The table below is a cheatsheet for people that are moving their service from heroku to eb cli 
 
-- Install eb cli
+Prerequisites
+-------------
 ```
+# Install eb cli
 pip install awsebcli --upgrade --user
+
+# Use virtualenv
+virtualenv -p python3 .env
+source .env/bin/activate
 ```
 
-- Setup with git and github
-- Environments: development, testing, and production. 
-
-- Setup with CodeBuild & CodePipeline
+Credentials
+------------
 ```
+
+Defaults are defined in ~/.aws/credentials
+
+TODO: How to setup project specific?
+
+```
+
+Load balancing
+--------------
+```
+
+
+```
+
+CD/CI system
+------------
+```
+- CodeBuild
+- CodePipeline
+- Push to github.
+
 https://medium.com/hollowverse/how-to-use-aws-codebuild-codepipeline-to-automate-deployment-to-elastic-beanstalk-cff01b725c41
 
 Add a buildspec.yml file to trigger CodeBuild to be used
 ```
 
-- Custom Domain
-- SSL
+Custom Domain and SSL
+---------------------
+```
+TODO, see: https://tomkadwill.com/running-rails-on-aws-elastic-beanstalk
+See: eb labs setup-ssl
+```
 
-- Configuring the database
-
-See
+Configuring a database
+------------------------
 
 https://tomkadwill.com/running-rails-on-aws-elastic-beanstalk
 https://medium.com/@jameshamann/deploying-rails-5-app-using-elastic-beanstalk-and-postgresql-8ca19bc7648a
@@ -37,17 +65,24 @@ https://medium.com/@jameshamann/deploying-rails-5-app-using-elastic-beanstalk-an
 brew install awsebcli
 ```
 
+
+
+Connect to S3
+-------------
+```
+
+
+```
+
 Flask app
 ---------
 ```
 Run:
 python application.py
+```
 
-
-
-
-Files
------
+File explanations
+-----------------
 ```
 .elasticbeanstalk
   config.yml
@@ -55,40 +90,39 @@ Files
 
 ```
 
-
-
-
-
 Commands
 --------
 
 ```
-virtual env
-
-
 eb init
 # Initialize a new eb application
 
 eb create
-# Create a new environment, and upload it to aws
-# load balancer type 2 is always the right choice
+# Create a new environment, and upload it to aws.
+# load balancer type 2 is always the right choice.
+# Use `eb list` to list environments.
 
+eb deploy
 
+eb open
 
+eb status
+eb health
 
 eb use
-eb deploy
-eb open
-eb status
-eb list
+
 eb logs
 eb logs --stream -g /var/log/eb-activity.log
-eb create
-eb ssh
-eb --help
-eb status
+
 eb terminate
-heroku --version | eb --version
+
+eb ssh
+
+
+
+
+
+
 
 heroku open
 
