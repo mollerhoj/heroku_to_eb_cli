@@ -66,11 +66,17 @@ brew install awsebcli
 ```
 
 
+Logging
+--------
+```
+Enable "S3 log storage" and "Instance log streaming to CloudWatch Logs" in GUI: Elastic Beanstalk > Configuration > Software.
+```
 
 Connect to S3
 -------------
 ```
-
+By creating a bucket with a name starting with `elasticbeanstalk-`, you will automatically have access.
+See save/ and load/ endpoints of the application for an example for using s3 with boto3.
 
 ```
 
