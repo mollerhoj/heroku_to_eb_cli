@@ -8,6 +8,8 @@ I'm a long time user of heroku's excelent PaaS. But AWS has a number of advantag
 
 The table below is a cheatsheet for people that are moving their service from heroku to eb cli 
 
+
+
 Prerequisites
 -------------
 ```
@@ -30,13 +32,15 @@ TODO: How to setup project specific?
 Monitor RAM usage
 --------------
 ```
-TODO
+https://aws.amazon.com/code/amazon-cloudwatch-monitoring-scripts-for-linux/
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html
 ```
 
 Load balancing
 --------------
 ```
-TODO
+AWS Auto Scaling - Not needed yet.
+Configure in EB GUI: Elastic Beanstalk > Configuration > Load Balancer > Processes > Edit > Sessions
 ```
 
 CD/CI system
@@ -52,6 +56,13 @@ https://medium.com/hollowverse/how-to-use-aws-codebuild-codepipeline-to-automate
 Add a buildspec.yml file to trigger CodeBuild to be used
 ```
 
+buildspec.yml
+```
+phases: To go through when building the application
+
+artifacts: Files outputted after build
+```
+
 Custom Domain and SSL
 ---------------------
 ```
@@ -65,6 +76,10 @@ TODO: I don't need this for now as my service is stateless, will add notes if I 
 
 https://tomkadwill.com/running-rails-on-aws-elastic-beanstalk
 https://medium.com/@jameshamann/deploying-rails-5-app-using-elastic-beanstalk-and-postgresql-8ca19bc7648a
+
+
+Configuring a ElastiCache (Redis) cache
+-------------------------
 
 Logging
 --------
@@ -98,8 +113,10 @@ See save/ and load/ endpoints of the application for an example for using s3 wit
 Flask app
 ---------
 ```
-Run:
+# Run:
 python application.py
+# Test:
+python -m pytest
 ```
 
 Commands
@@ -110,7 +127,7 @@ eb init
 # Initialize a new eb application
 
 eb create
-# Create a new environment, and upload it to aws.
+# Create a new environment (staging, production, testing etc), and upload it to aws.
 # load balancer type 2 is always the right choice.
 # Use `eb list` to list environments.
 
